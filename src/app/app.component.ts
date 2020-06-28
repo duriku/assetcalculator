@@ -19,6 +19,10 @@ export class AppComponent implements OnInit{
     Validators.required,
   ]);
 
+  ngOnInit(): void {
+
+  }
+
 
   // TODO: move the calculation to a service
   calculate(): void {
@@ -34,9 +38,6 @@ export class AppComponent implements OnInit{
     } as Result;
   }
 
-  ngOnInit(): void {
-
-  }
 }
 
 // BTL:

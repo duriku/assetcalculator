@@ -22,12 +22,12 @@
     <p>
       <mat-form-field class="example-full-width">
         <mat-label>Purchase Price</mat-label>
-        <input matInput [formControl]="purchasePrice">
+        <input matInput [formControl]="purchasePrice" placeholder="£">
 <!--        <mat-hint>Purchase price of property!</mat-hint>-->
       </mat-form-field>
     </p>
     <p>
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width" placeholder="£">
         <mat-label>Monthly Rent</mat-label>
         <input type="text"  matInput [formControl]="monthlyRent">
       </mat-form-field>
@@ -39,13 +39,13 @@
 
   <div *ngIf="result">
     <p>
-      Stamp Duty {{result.stampDuty | currency: 'EUR'}}
+      Stamp Duty {{result.stampDuty | currency}}
     </p>
     <p>
-      Total cost {{result.totalCosts | currency: 'gbp'}}
+      Total cost {{result.totalCosts | currency}}
     </p>
     <p>
-      Rental Yield {{result.rentalYield | currency: 'gbp'}}
+      Rental Yield {{result.rentalYield | percent: '1.2'}}
     </p>
   </div>
 
