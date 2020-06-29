@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {Result, StampDutyRule} from './model/calculation.model';
+import {Result, StampDutyRule, Tile} from './model/calculation.model';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,6 @@ import {Result, StampDutyRule} from './model/calculation.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-
   result: Result;
 
   purchasePrice = new FormControl('', [
@@ -19,25 +18,57 @@ export class AppComponent implements OnInit{
     Validators.required,
   ]);
 
+  mortgage = new FormControl('yes', [
+    Validators.required,
+  ]);
+
+  mortgageRate = new FormControl('', [
+    Validators.required,
+  ]);
+
+  deposit = new FormControl('', [
+    Validators.required,
+  ]);
+
+  monthlyMaintenanceFees = new FormControl('', [
+    Validators.required,
+  ]);
+
+  monthlyAgentFees = new FormControl('', [
+    Validators.required,
+  ]);
+
+  yearlyInsurance = new FormControl('', [
+    Validators.required,
+  ]);
+
   ngOnInit(): void {
 
   }
 
-
   // TODO: move the calculation to a service
   calculate(): void {
-    console.log(this.purchasePrice.value);
-    console.log(this.monthlyRent.value);
-
     const stampDuty = calculateStampDuty(this.purchasePrice.value);
     const totalCosts = +this.purchasePrice.value + stampDuty;
     const rentalYield = (12 * this.monthlyRent.value)  / totalCosts;
+    // TODO: deposit is the purchase price if it's a cashbuyer
+    const monthlyMortgagePayment = ((+this.purchasePrice.value - +this.deposit.value) * (+this.mortgageRate.value / 100)) / 12;
+    const monthlyExpenses = (+this.yearlyInsurance.value / 12) + monthlyMortgagePayment + +this.monthlyMaintenanceFees.value;
+    const monthlyCashFlow = +this.monthlyRent.value - monthlyExpenses;
+    const returnOnInvestment = (12 * monthlyCashFlow) / +this.deposit.value;
 
     this.result = {
-      stampDuty, totalCosts, rentalYield
+      stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, monthlyExpenses, monthlyMortgagePayment
     } as Result;
   }
 
+  clicked(): void {
+    console.log('clicked');
+  }
+
+  ltv(ltv: number): void {
+    this.deposit.setValue(+this.purchasePrice.value * ltv);
+  }
 }
 
 // BTL:

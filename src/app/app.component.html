@@ -2,54 +2,209 @@
 <mat-toolbar color="primary">
   <span>Home Calculators</span>
   <span class="example-spacer"></span>
+
+  <div class="top-navbar-menu">
+
+    <button mat-button>
+      <mat-icon class="example-icon" aria-hidden="false">input</mat-icon>
+      <span> Simple Calculator</span>
+    </button>
+
+    <button mat-button>
+      <mat-icon class="example-icon" aria-hidden="false">home</mat-icon>
+      <span> Buy To Let</span>
+    </button>
+
+    <button mat-button>
+      <mat-icon class="example-icon" aria-hidden="false">house</mat-icon>
+      <span> Buy To Let HMOs</span>
+    </button>
+
+    <button mat-button>
+      <mat-icon class="example-icon" aria-hidden="false">hotel</mat-icon>
+      <span> Service Accommodations</span>
+    </button>
+
+    <button mat-button>
+      <mat-icon class="example-icon" aria-hidden="false">business</mat-icon>
+      <span> Buy Refurb Refinance</span>
+    </button>
+  </div>
+
+  <span class="example-spacer"></span>
+
 </mat-toolbar>
 
 <div class="content" role="main">
-  <form class="example-form" (ngSubmit)="calculate()">
-<!--    <mat-form-field class="example-full-width">-->
-<!--      <mat-label>Email</mat-label>-->
-<!--      <input matInput [formControl]="emailFormControl"-->
-<!--             placeholder="Ex. pat@example.com">-->
-<!--      <mat-hint>Errors appear instantly!</mat-hint>-->
-<!--      <mat-error *ngIf="this.emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
-<!--        Please enter a valid email address-->
-<!--      </mat-error>-->
-<!--      <mat-error *ngIf="emailFormControl.hasError('required')">-->
-<!--        Email is <strong>required</strong>-->
-<!--      </mat-error>-->
-<!--    </mat-form-field>-->
+  <div fxLayout="row" fxLayoutAlign="space-around" *ngIf="false">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Simple Yield Calculator</mat-card-title>
+        <!--      <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+      </mat-card-header>
+      <!--    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LET'S GO</button>
+      </mat-card-actions>
+    </mat-card>
 
-    <p>
-      <mat-form-field class="example-full-width">
-        <mat-label>Purchase Price</mat-label>
-        <input matInput [formControl]="purchasePrice" placeholder="£">
-<!--        <mat-hint>Purchase price of property!</mat-hint>-->
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field class="example-full-width" placeholder="£">
-        <mat-label>Monthly Rent</mat-label>
-        <input type="text"  matInput [formControl]="monthlyRent">
-      </mat-form-field>
-    </p>
-    <p>
-      <button type="submit" mat-raised-button color="primary">Calculate</button>
-    </p>
-  </form>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Buy To Let Calculator</mat-card-title>
+        <!--      <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+      </mat-card-header>
+      <!--    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LET'S GO</button>
+        <!--      <button mat-button>SHARE</button>-->
+      </mat-card-actions>
+    </mat-card>
 
-  <div *ngIf="result">
-    <p>
-      Stamp Duty {{result.stampDuty | currency}}
-    </p>
-    <p>
-      Total cost {{result.totalCosts | currency}}
-    </p>
-    <p>
-      Rental Yield {{result.rentalYield | percent: '1.2'}}
-    </p>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Buy Refurbish Refinance Calculator</mat-card-title>
+        <!--      <mat-card-subtitle>Calculator</mat-card-subtitle>-->
+      </mat-card-header>
+      <!--    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LET'S GO</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 
 
+  <div fxLayout="row" fxLayoutAlign="space-around" class="calculator-container">
+    <div class="calculator-column">
+      <form class="calculator-form" (ngSubmit)="calculate()">
+        <div>
+          <mat-form-field class="example-full-width">
+            <mat-label>Purchase Price</mat-label>
+            <input matInput [formControl]="purchasePrice" placeholder="£">
+            <!--        <mat-hint>Purchase price of property!</mat-hint>-->
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width" placeholder="£">
+            <mat-label>Monthly Rent</mat-label>
+            <input type="text" matInput [formControl]="monthlyRent">
+          </mat-form-field>
+        </div>
+<!--        <h3>Finances</h3>-->
+        <div>
+          <mat-radio-group [formControl]="mortgage" style="width: 50%" fxLayout="row" fxLayoutAlign="space-between">
+            <mat-radio-button class="example-margin" value="yes" selected>Mortgage</mat-radio-button>
+            <mat-radio-button class="example-margin" value="no">Cash</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width" placeholder="ex: 2.10%">
+            <mat-label>Mortgage Rate</mat-label>
+            <input type="text" matInput [formControl]="mortgageRate">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width" placeholder="£">
+            <mat-label>Deposit</mat-label>
+            <input type="text" matInput [formControl]="deposit">
+          </mat-form-field>
+        <div>
+          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>
+          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>
+        </div>
+        </div>
+<!--        <h3>Costs</h3>-->
+        <div>
+          <mat-form-field class="example-full-width" placeholder="£">
+            <mat-label>Monthly Maintenance Fees</mat-label>
+            <input type="text" matInput [formControl]="monthlyMaintenanceFees">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width" placeholder="£">
+            <mat-label>Monthly Agent Fees</mat-label>
+            <input type="text" matInput [formControl]="monthlyAgentFees">
+          </mat-form-field>
+        </div>
 
+        <div>
+          <mat-form-field class="example-full-width" placeholder="£">
+            <mat-label>Yearly Insurance</mat-label>
+            <input type="text" matInput [formControl]="yearlyInsurance">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button type="submit" mat-raised-button color="primary">Calculate</button>
+        </div>
+      </form>
+
+    </div>
+    <div class="result-column">
+      <mat-card class="result-card" *ngIf="result">
+        <mat-card-header>
+          <mat-card-title>Calculation Result</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>
+            Stamp Duty {{result.stampDuty | currency}}
+          </p>
+          <p>
+            Total cost {{result.totalCosts | currency}}
+          </p>
+          <p>
+            Rental Yield {{result.rentalYield | percent: '1.2'}}
+          </p>
+          <p>
+            Monthly Mortgage payment {{result.monthlyMortgagePayment | currency}}
+          </p>
+          <p>
+            Monthly Expenses {{result.monthlyExpenses | currency}}
+          </p>
+          <p>
+            Monthly Cash Flow {{result.monthlyCashFlow | currency}}
+          </p>
+          <p>
+            Return on Investment {{result.returnOnInvestment | percent: '1.2'}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="explanation-column">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis hic maxime nemo, numquam omnis quia suscipit
+        vero! Ab adipisci alias deserunt fugiat labore nostrum, obcaecati, quasi quos repellat tenetur veniam.</p>
+      <p>Alias assumenda atque, aut, dolore dolorem doloremque expedita labore libero minus modi non nostrum nulla
+        officiis quae recusandae unde veniam voluptatibus! Cum ex fugit hic libero magnam quas vel veniam.</p>
+      <p>Corporis cupiditate, nesciunt. Ab aspernatur corporis deleniti dolorum eius est hic in necessitatibus neque,
+        vel.
+        Facere laborum pariatur quibusdam tenetur! Adipisci at doloribus, numquam optio pariatur quis quisquam rem
+        unde?</p>
+      <p>Animi, ea esse et illo illum incidunt ipsam nam! Alias amet, beatae dignissimos dolor enim error explicabo, id
+        illo, maxime minima necessitatibus obcaecati quia quo quos ratione reiciendis tempora veritatis?</p>
+    </div>
+  </div>
 </div>
-

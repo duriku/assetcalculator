@@ -10,6 +10,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatRadioModule,
+    MatCardModule,
+    MatGridListModule,
+    FlexLayoutModule
   ],
   providers: [{provide: DEFAULT_CURRENCY_CODE, useValue: 'GBP'}],
   bootstrap: [AppComponent]
