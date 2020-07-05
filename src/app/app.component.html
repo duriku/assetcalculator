@@ -108,52 +108,59 @@
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="example-full-width" placeholder="£">
+          <mat-form-field class="example-full-width">
             <mat-label>Monthly Rent</mat-label>
-            <input type="text" matInput [formControl]="monthlyRent">
+            <input type="text" matInput [formControl]="monthlyRent" placeholder="£">
           </mat-form-field>
         </div>
-<!--        <h3>Finances</h3>-->
-        <div>
+        <!--        <h3>Finances</h3>-->
+        <div style="margin-bottom: 1em">
           <mat-radio-group [formControl]="mortgage" style="width: 50%" fxLayout="row" fxLayoutAlign="space-between">
             <mat-radio-button class="example-margin" value="yes" selected>Mortgage</mat-radio-button>
             <mat-radio-button class="example-margin" value="no">Cash</mat-radio-button>
           </mat-radio-group>
         </div>
         <div>
-          <mat-form-field class="example-full-width" placeholder="ex: 2.10%">
+          <mat-form-field class="example-full-width">
             <mat-label>Mortgage Rate</mat-label>
-            <input type="text" matInput [formControl]="mortgageRate">
+            <input type="text" matInput [formControl]="mortgageRate" placeholder="%">
           </mat-form-field>
         </div>
-        <div>
-          <mat-form-field class="example-full-width" placeholder="£">
+        <div style="margin-bottom: 1em">
+          <mat-form-field class="example-full-width" >
             <mat-label>Deposit</mat-label>
-            <input type="text" matInput [formControl]="deposit">
+            <input type="text" matInput [formControl]="deposit" placeholder="£">
           </mat-form-field>
-        <div>
-          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>
-          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>
+          <div>
+            <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>
+            <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>
+          </div>
         </div>
-        </div>
-<!--        <h3>Costs</h3>-->
+        <!--        <h3>Costs</h3>-->
         <div>
-          <mat-form-field class="example-full-width" placeholder="£">
-            <mat-label>Monthly Maintenance Fees</mat-label>
-            <input type="text" matInput [formControl]="monthlyMaintenanceFees">
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="example-full-width" placeholder="£">
-            <mat-label>Monthly Agent Fees</mat-label>
-            <input type="text" matInput [formControl]="monthlyAgentFees">
+          <mat-form-field class="example-full-width">
+            <mat-label>Legal Fees</mat-label>
+            <input type="text" matInput [formControl]="legalFees" placeholder="£">
           </mat-form-field>
         </div>
 
         <div>
-          <mat-form-field class="example-full-width" placeholder="£">
+          <mat-form-field class="example-full-width">
+            <mat-label>Monthly Maintenance Fees</mat-label>
+            <input type="text" matInput [formControl]="monthlyMaintenanceFees" placeholder="£">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <mat-label>Monthly Agent Fees</mat-label>
+            <input type="text" matInput [formControl]="monthlyAgentFees" placeholder="£">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="example-full-width">
             <mat-label>Yearly Insurance</mat-label>
-            <input type="text" matInput [formControl]="yearlyInsurance">
+            <input type="text" matInput [formControl]="yearlyInsurance" placeholder="£">
           </mat-form-field>
         </div>
 

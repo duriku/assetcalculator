@@ -30,6 +30,10 @@ export class AppComponent implements OnInit{
     Validators.required,
   ]);
 
+  legalFees = new FormControl('', [
+    Validators.required,
+  ]);
+
   monthlyMaintenanceFees = new FormControl('', [
     Validators.required,
   ]);
@@ -49,13 +53,13 @@ export class AppComponent implements OnInit{
   // TODO: move the calculation to a service
   calculate(): void {
     const stampDuty = calculateStampDuty(this.purchasePrice.value);
-    const totalCosts = +this.purchasePrice.value + stampDuty;
+    const totalCosts = +this.deposit.value + stampDuty + +this.legalFees.value;
     const rentalYield = (12 * this.monthlyRent.value)  / totalCosts;
     // TODO: deposit is the purchase price if it's a cashbuyer
     const monthlyMortgagePayment = ((+this.purchasePrice.value - +this.deposit.value) * (+this.mortgageRate.value / 100)) / 12;
-    const monthlyExpenses = (+this.yearlyInsurance.value / 12) + monthlyMortgagePayment + +this.monthlyMaintenanceFees.value;
+    const monthlyExpenses = (+this.yearlyInsurance.value / 12) + monthlyMortgagePayment + +this.monthlyMaintenanceFees.value + +this.monthlyAgentFees.value;
     const monthlyCashFlow = +this.monthlyRent.value - monthlyExpenses;
-    const returnOnInvestment = (12 * monthlyCashFlow) / +this.deposit.value;
+    const returnOnInvestment = (12 * monthlyCashFlow) / (totalCosts);
 
     this.result = {
       stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, monthlyExpenses, monthlyMortgagePayment
@@ -106,7 +110,7 @@ function calculateStampDuty(purchasePrice: number): number {
       return result + remainingAmount * rule.percentage;
     }
     remainingAmount -= rule.value;
-    result = rule.value * rule.percentage;
+    result = result + rule.value * rule.percentage;
   }
 
   return result;
