@@ -6,6 +6,7 @@ export interface Result {
   monthlyMortgagePayment: number;
   monthlyExpenses: number;
   monthlyCashFlow: number;
+  yearlyProfit: number;
 }
 
 

@@ -4,31 +4,30 @@
   <span class="example-spacer"></span>
 
   <div class="top-navbar-menu">
+<!--    <button mat-button>-->
+<!--      <mat-icon class="example-icon" aria-hidden="false">input</mat-icon>-->
+<!--      <span> Simple Calculator</span>-->
+<!--    </button>-->
 
-    <button mat-button>
-      <mat-icon class="example-icon" aria-hidden="false">input</mat-icon>
-      <span> Simple Calculator</span>
-    </button>
+<!--    <button mat-button>-->
+<!--      <mat-icon class="example-icon" aria-hidden="false">home</mat-icon>-->
+<!--      <span> Buy To Let</span>-->
+<!--    </button>-->
 
-    <button mat-button>
-      <mat-icon class="example-icon" aria-hidden="false">home</mat-icon>
-      <span> Buy To Let</span>
-    </button>
+<!--    <button mat-button>-->
+<!--      <mat-icon class="example-icon" aria-hidden="false">house</mat-icon>-->
+<!--      <span> Buy To Let HMOs</span>-->
+<!--    </button>-->
 
-    <button mat-button>
-      <mat-icon class="example-icon" aria-hidden="false">house</mat-icon>
-      <span> Buy To Let HMOs</span>
-    </button>
+<!--    <button mat-button>-->
+<!--      <mat-icon class="example-icon" aria-hidden="false">hotel</mat-icon>-->
+<!--      <span> Service Accommodations</span>-->
+<!--    </button>-->
 
-    <button mat-button>
-      <mat-icon class="example-icon" aria-hidden="false">hotel</mat-icon>
-      <span> Service Accommodations</span>
-    </button>
-
-    <button mat-button>
-      <mat-icon class="example-icon" aria-hidden="false">business</mat-icon>
-      <span> Buy Refurb Refinance</span>
-    </button>
+<!--    <button mat-button>-->
+<!--      <mat-icon class="example-icon" aria-hidden="false">business</mat-icon>-->
+<!--      <span> Buy Refurb Refinance</span>-->
+<!--    </button>-->
   </div>
 
   <span class="example-spacer"></span>
@@ -37,7 +36,7 @@
 
 <div class="content" role="main">
   <div fxLayout="row" fxLayoutAlign="space-around" *ngIf="false">
-    <mat-card class="example-card">
+    <mat-card >
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>Simple Yield Calculator</mat-card-title>
@@ -56,7 +55,7 @@
       </mat-card-actions>
     </mat-card>
 
-    <mat-card class="example-card">
+    <mat-card >
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>Buy To Let Calculator</mat-card-title>
@@ -76,7 +75,7 @@
       </mat-card-actions>
     </mat-card>
 
-    <mat-card class="example-card">
+    <mat-card>
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>Buy Refurbish Refinance Calculator</mat-card-title>
@@ -99,73 +98,94 @@
 
   <div fxLayout="row" fxLayoutAlign="space-around" class="calculator-container">
     <div class="calculator-column">
-      <form class="calculator-form" (ngSubmit)="calculate()">
+      <form [formGroup]="calculatorForm" class="calculator-form" (ngSubmit)="calculate()">
         <div>
-          <mat-form-field class="example-full-width">
+          <mat-form-field >
             <mat-label>Purchase Price</mat-label>
-            <input matInput [formControl]="purchasePrice" placeholder="£">
-            <!--        <mat-hint>Purchase price of property!</mat-hint>-->
+            <label>
+              <input matInput [formControl]="purchasePrice" placeholder="£">
+            </label>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="example-full-width">
+          <mat-form-field >
             <mat-label>Monthly Rent</mat-label>
-            <input type="text" matInput [formControl]="monthlyRent" placeholder="£">
+            <label>
+              <input type="text" matInput [formControl]="monthlyRent" placeholder="£">
+            </label>
           </mat-form-field>
         </div>
         <!--        <h3>Finances</h3>-->
         <div style="margin-bottom: 1em">
           <mat-radio-group [formControl]="mortgage" style="width: 50%" fxLayout="row" fxLayoutAlign="space-between">
-            <mat-radio-button class="example-margin" value="yes" selected>Mortgage</mat-radio-button>
-            <mat-radio-button class="example-margin" value="no">Cash</mat-radio-button>
+            <mat-radio-button value="yes" selected>Mortgage</mat-radio-button>
+            <mat-radio-button value="no">Cash</mat-radio-button>
           </mat-radio-group>
         </div>
-        <div>
-          <mat-form-field class="example-full-width">
+        <div *ngIf="mortgage.value === 'yes'">
+          <mat-form-field >
             <mat-label>Mortgage Rate</mat-label>
             <input type="text" matInput [formControl]="mortgageRate" placeholder="%">
           </mat-form-field>
         </div>
         <div style="margin-bottom: 1em">
-          <mat-form-field class="example-full-width" >
+          <mat-form-field>
             <mat-label>Deposit</mat-label>
-            <input type="text" matInput [formControl]="deposit" placeholder="£">
+            <label>
+              <input type="text" matInput [formControl]="deposit" placeholder="£">
+            </label>
           </mat-form-field>
-          <div>
-            <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>
-            <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>
-          </div>
+<!--          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>-->
+<!--          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>-->
         </div>
+
         <!--        <h3>Costs</h3>-->
         <div>
-          <mat-form-field class="example-full-width">
+          <mat-form-field >
             <mat-label>Legal Fees</mat-label>
             <input type="text" matInput [formControl]="legalFees" placeholder="£">
           </mat-form-field>
         </div>
 
         <div>
-          <mat-form-field class="example-full-width">
-            <mat-label>Monthly Maintenance Fees</mat-label>
-            <input type="text" matInput [formControl]="monthlyMaintenanceFees" placeholder="£">
+          <mat-form-field >
+            <mat-label>Refurb Costs</mat-label>
+            <input type="text" matInput [formControl]="refurbCosts" placeholder="£">
           </mat-form-field>
         </div>
+
         <div>
-          <mat-form-field class="example-full-width">
-            <mat-label>Monthly Agent Fees</mat-label>
+          <mat-form-field >
+            <mat-label>Monthly Management Fees</mat-label>
             <input type="text" matInput [formControl]="monthlyAgentFees" placeholder="£">
           </mat-form-field>
+          <div>
+<!--            <button type="button" mat-stroked-button color="accent" (click)="management(0.08)">8%</button>-->
+<!--            <button type="button" mat-stroked-button color="accent" (click)="management(0.1)">10%</button>-->
+<!--            <button type="button" mat-stroked-button color="accent" (click)="management(0.12)">12%</button>-->
+          </div>
         </div>
 
         <div>
-          <mat-form-field class="example-full-width">
-            <mat-label>Yearly Insurance</mat-label>
-            <input type="text" matInput [formControl]="yearlyInsurance" placeholder="£">
+          <mat-form-field >
+            <mat-label>Monthly Maintenance Fees</mat-label>
+            <label>
+              <input type="text" matInput [formControl]="monthlyMaintenanceFees" placeholder="£">
+            </label>
           </mat-form-field>
         </div>
 
         <div>
-          <button type="submit" mat-raised-button color="primary">Calculate</button>
+          <mat-form-field >
+            <mat-label>Yearly Insurance</mat-label>
+            <label>
+              <input type="text" matInput [formControl]="yearlyInsurance" placeholder="£">
+            </label>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button [disabled]="calculatorForm.invalid" type="submit" mat-raised-button color="primary">Calculate</button>
         </div>
       </form>
 
@@ -178,10 +198,16 @@
 
         <mat-card-content>
           <p>
-            Stamp Duty {{result.stampDuty | currency}}
+            <b>Total cost {{result.totalCosts | currency}}</b>
           </p>
           <p>
-            Total cost {{result.totalCosts | currency}}
+            <b>Monthly Cash Flow {{result.monthlyCashFlow | currency}}</b>
+          </p>
+          <p>
+            <b>Return on Investment {{result.returnOnInvestment | percent: '1.2'}} </b>
+          </p>
+          <p>
+            Stamp Duty {{result.stampDuty | currency}}
           </p>
           <p>
             Rental Yield {{result.rentalYield | percent: '1.2'}}
@@ -193,25 +219,10 @@
             Monthly Expenses {{result.monthlyExpenses | currency}}
           </p>
           <p>
-            Monthly Cash Flow {{result.monthlyCashFlow | currency}}
-          </p>
-          <p>
-            Return on Investment {{result.returnOnInvestment | percent: '1.2'}}
+            Yearly Profit {{result.yearlyProfit | currency}}
           </p>
         </mat-card-content>
       </mat-card>
-    </div>
-    <div class="explanation-column">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis hic maxime nemo, numquam omnis quia suscipit
-        vero! Ab adipisci alias deserunt fugiat labore nostrum, obcaecati, quasi quos repellat tenetur veniam.</p>
-      <p>Alias assumenda atque, aut, dolore dolorem doloremque expedita labore libero minus modi non nostrum nulla
-        officiis quae recusandae unde veniam voluptatibus! Cum ex fugit hic libero magnam quas vel veniam.</p>
-      <p>Corporis cupiditate, nesciunt. Ab aspernatur corporis deleniti dolorum eius est hic in necessitatibus neque,
-        vel.
-        Facere laborum pariatur quibusdam tenetur! Adipisci at doloribus, numquam optio pariatur quis quisquam rem
-        unde?</p>
-      <p>Animi, ea esse et illo illum incidunt ipsam nam! Alias amet, beatae dignissimos dolor enim error explicabo, id
-        illo, maxime minima necessitatibus obcaecati quia quo quos ratione reiciendis tempora veritatis?</p>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {Result, StampDutyRule, Tile} from './model/calculation.model';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Result, StampDutyRule} from './model/calculation.model';
 
 @Component({
   selector: 'app-root',
@@ -10,41 +10,39 @@ import {Result, StampDutyRule, Tile} from './model/calculation.model';
 export class AppComponent implements OnInit{
   result: Result;
 
-  purchasePrice = new FormControl('', [
-    Validators.required,
-  ]);
+  calculatorForm = new FormGroup({
+    purchasePrice: new FormControl('', [
+      Validators.required,
+    ]),
+    monthlyRent: new FormControl('', [
+      Validators.required,
+    ]),
+    mortgage: new FormControl('yes', [
+      Validators.required,
+    ]),
+    mortgageRate: new FormControl('3.6', [
+      Validators.required,
+    ]),
+    deposit: new FormControl('', [
+      Validators.required,
+    ]),
+    legalFees: new FormControl('1500', [
+      Validators.required,
+    ]),
+    refurbCosts: new FormControl('', [
+      Validators.required,
+    ]),
+    monthlyMaintenanceFees: new FormControl('80', [
+      Validators.required,
+    ]),
+    monthlyAgentFees: new FormControl('', [
+      Validators.required,
+    ]),
+    yearlyInsurance: new FormControl('200', [
+      Validators.required,
+    ])
+  });
 
-  monthlyRent = new FormControl('', [
-    Validators.required,
-  ]);
-
-  mortgage = new FormControl('yes', [
-    Validators.required,
-  ]);
-
-  mortgageRate = new FormControl('', [
-    Validators.required,
-  ]);
-
-  deposit = new FormControl('', [
-    Validators.required,
-  ]);
-
-  legalFees = new FormControl('', [
-    Validators.required,
-  ]);
-
-  monthlyMaintenanceFees = new FormControl('', [
-    Validators.required,
-  ]);
-
-  monthlyAgentFees = new FormControl('', [
-    Validators.required,
-  ]);
-
-  yearlyInsurance = new FormControl('', [
-    Validators.required,
-  ]);
 
   ngOnInit(): void {
 
@@ -54,15 +52,16 @@ export class AppComponent implements OnInit{
   calculate(): void {
     const stampDuty = calculateStampDuty(this.purchasePrice.value);
     const totalCosts = +this.deposit.value + stampDuty + +this.legalFees.value;
-    const rentalYield = (12 * this.monthlyRent.value)  / totalCosts;
+    const rentalYield = (12 * this.monthlyRent.value)  / this.purchasePrice.value;
     // TODO: deposit is the purchase price if it's a cashbuyer
     const monthlyMortgagePayment = ((+this.purchasePrice.value - +this.deposit.value) * (+this.mortgageRate.value / 100)) / 12;
     const monthlyExpenses = (+this.yearlyInsurance.value / 12) + monthlyMortgagePayment + +this.monthlyMaintenanceFees.value + +this.monthlyAgentFees.value;
     const monthlyCashFlow = +this.monthlyRent.value - monthlyExpenses;
+    const yearlyProfit = monthlyCashFlow * 12;
     const returnOnInvestment = (12 * monthlyCashFlow) / (totalCosts);
 
     this.result = {
-      stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, monthlyExpenses, monthlyMortgagePayment
+      stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, yearlyProfit, monthlyExpenses, monthlyMortgagePayment
     } as Result;
   }
 
@@ -72,6 +71,50 @@ export class AppComponent implements OnInit{
 
   ltv(ltv: number): void {
     this.deposit.setValue(+this.purchasePrice.value * ltv);
+  }
+
+  management(rate: number): void {
+    this.monthlyAgentFees.setValue(+this.monthlyRent.value * rate);
+  }
+
+  get purchasePrice(): AbstractControl  {
+    return this.calculatorForm.get('purchasePrice');
+  }
+
+  get monthlyRent(): AbstractControl  {
+    return this.calculatorForm.get('monthlyRent');
+  }
+
+  get mortgage(): AbstractControl  {
+    return this.calculatorForm.get('mortgage');
+  }
+
+  get mortgageRate(): AbstractControl  {
+    return this.calculatorForm.get('mortgageRate');
+  }
+
+  get deposit(): AbstractControl  {
+    return this.calculatorForm.get('deposit');
+  }
+
+  get legalFees(): AbstractControl  {
+    return this.calculatorForm.get('legalFees');
+  }
+
+  get refurbCosts(): AbstractControl  {
+    return this.calculatorForm.get('refurbCosts');
+  }
+
+  get monthlyMaintenanceFees(): AbstractControl  {
+    return this.calculatorForm.get('monthlyMaintenanceFees');
+  }
+
+  get monthlyAgentFees(): AbstractControl  {
+    return this.calculatorForm.get('monthlyAgentFees');
+  }
+
+  get yearlyInsurance(): AbstractControl  {
+    return this.calculatorForm.get('yearlyInsurance');
   }
 }
 
