@@ -1,6 +1,6 @@
 <!-- Toolbar -->
 <mat-toolbar color="primary">
-  <span>Home Calculators</span>
+  <span>Asset Calculator (Buy To Let)</span>
   <span class="example-spacer"></span>
 
   <div class="top-navbar-menu">
@@ -38,7 +38,7 @@
   <div fxLayout="row" fxLayoutAlign="space-around" *ngIf="false">
     <mat-card >
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar ></div>
         <mat-card-title>Simple Yield Calculator</mat-card-title>
         <!--      <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
       </mat-card-header>
@@ -57,7 +57,7 @@
 
     <mat-card >
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar></div>
         <mat-card-title>Buy To Let Calculator</mat-card-title>
         <!--      <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
       </mat-card-header>
@@ -77,7 +77,7 @@
 
     <mat-card>
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar ></div>
         <mat-card-title>Buy Refurbish Refinance Calculator</mat-card-title>
         <!--      <mat-card-subtitle>Calculator</mat-card-subtitle>-->
       </mat-card-header>
@@ -98,7 +98,7 @@
 
   <div fxLayout="row" fxLayoutAlign="space-around" class="calculator-container">
     <div class="calculator-column">
-      <form [formGroup]="calculatorForm" class="calculator-form" (ngSubmit)="calculate()">
+      <form [formGroup]="calculatorForm" class="calculator-form" (ngSubmit)="submit()">
         <div>
           <mat-form-field >
             <mat-label>Purchase Price</mat-label>
@@ -125,10 +125,12 @@
         <div *ngIf="mortgage.value === 'yes'">
           <mat-form-field >
             <mat-label>Mortgage Rate</mat-label>
-            <input type="text" matInput [formControl]="mortgageRate" placeholder="%">
+            <label>
+              <input type="text" matInput [formControl]="mortgageRate" placeholder="%">
+            </label>
           </mat-form-field>
         </div>
-        <div style="margin-bottom: 1em">
+        <div *ngIf="mortgage.value === 'yes'" style="margin-bottom: 1em">
           <mat-form-field>
             <mat-label>Deposit</mat-label>
             <label>
@@ -190,39 +192,51 @@
       </form>
 
     </div>
-    <div class="result-column">
-      <mat-card class="result-card" *ngIf="result">
-        <mat-card-header>
-          <mat-card-title>Calculation Result</mat-card-title>
-        </mat-card-header>
 
-        <mat-card-content>
-          <p>
-            <b>Total cost {{result.totalCosts | currency}}</b>
-          </p>
-          <p>
-            <b>Monthly Cash Flow {{result.monthlyCashFlow | currency}}</b>
-          </p>
-          <p>
-            <b>Return on Investment {{result.returnOnInvestment | percent: '1.2'}} </b>
-          </p>
-          <p>
-            Stamp Duty {{result.stampDuty | currency}}
-          </p>
-          <p>
-            Rental Yield {{result.rentalYield | percent: '1.2'}}
-          </p>
-          <p>
-            Monthly Mortgage payment {{result.monthlyMortgagePayment | currency}}
-          </p>
-          <p>
-            Monthly Expenses {{result.monthlyExpenses | currency}}
-          </p>
-          <p>
-            Yearly Profit {{result.yearlyProfit | currency}}
-          </p>
-        </mat-card-content>
-      </mat-card>
+
+    <div class="result-column" *ngIf="result">
+      <div fxLayout="column" fxLayoutAlign="space-between space-between" style="min-height: 22em">
+        <div fxLayout="column" fxLayoutAlign="space-around space-around" style="min-height: 8em; font-weight: bold" >
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Total cost</div>
+            <div>{{result.totalCosts | currency}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Monthly Cash Flow</div>
+            <div>{{result.monthlyCashFlow | currency}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Return on Investment</div>
+            <div>{{result.returnOnInvestment | percent: '1.2'}}</div>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around space-around" style="min-height: 10em">
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Stamp Duty</div>
+            <div>{{result.stampDuty | currency}}</div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Rental Yield</div>
+            <div>{{result.rentalYield | percent: '1.2'}}</div>
+          </div>
+
+          <div *ngIf="result.monthlyMortgagePayment" fxLayout="row" fxLayoutAlign="space-between">
+            <div>Monthly Mortgage payment</div>
+            <div>{{result.monthlyMortgagePayment | currency}}</div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Monthly Expenses</div>
+            <div>{{result.monthlyExpenses | currency}}</div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div>Yearly Profit</div>
+            <div>{{result.yearlyProfit | currency}}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

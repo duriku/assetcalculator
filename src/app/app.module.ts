@@ -14,6 +14,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatRadioModule,
     MatCardModule,
     MatGridListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
   ],
   providers: [{provide: DEFAULT_CURRENCY_CODE, useValue: 'GBP'}],
   bootstrap: [AppComponent]
