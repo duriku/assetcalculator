@@ -10,6 +10,7 @@ import {ActivatedRoute, NavigationExtras, Router, UrlSerializer} from '@angular/
 })
 export class AppComponent implements OnInit {
   result: Result;
+  version = '0.1-alpha';
 
   calculatorForm = new FormGroup({
       purchasePrice: new FormControl('', [
@@ -39,6 +40,12 @@ export class AppComponent implements OnInit {
       ]),
       yearlyInsurance: new FormControl('200', [
         Validators.required,
+      ]),
+      annualGroundRent: new FormControl('', [
+        Validators.required,
+      ]),
+      annualServiceCharge: new FormControl('', [
+        Validators.required,
       ])
     },
     {
@@ -64,6 +71,8 @@ export class AppComponent implements OnInit {
       this.monthlyMaintenanceFees.setValue(params.monthlyMaintenanceFees);
       this.monthlyAgentFees.setValue(params.monthlyAgentFees);
       this.yearlyInsurance.setValue(params.yearlyInsurance);
+      this.annualServiceCharge.setValue(params.annualServiceCharge);
+      this.annualGroundRent.setValue(params.annualGroundRent);
 
       if (this.calculatorForm.valid){
         this.calculate();
@@ -88,6 +97,8 @@ export class AppComponent implements OnInit {
         monthlyMaintenanceFees: this.monthlyMaintenanceFees.value,
         monthlyAgentFees: this.monthlyAgentFees.value,
         yearlyInsurance: this.yearlyInsurance.value,
+        annualGroundRent: this.annualGroundRent.value,
+        annualServiceCharge: this.annualServiceCharge.value,
       }
     };
 
@@ -96,25 +107,37 @@ export class AppComponent implements OnInit {
 
   // TODO: move the calculation to a service
   calculate(): void {
-    // TODO: the calculation will be different with and without mortgage!
+    // using mortgage
     const stampDuty = calculateStampDuty(this.purchasePrice.value);
-    const totalCosts = +this.deposit.value + stampDuty + +this.legalFees.value;
     const rentalYield = (12 * this.monthlyRent.value) / this.purchasePrice.value;
-    // TODO: deposit is the purchase price if it's a cashbuyer
-    const monthlyMortgagePayment = ((+this.purchasePrice.value - +this.deposit.value) * (+this.mortgageRate.value / 100)) / 12;
-    const monthlyExpenses = (+this.yearlyInsurance.value / 12) + monthlyMortgagePayment + +this.monthlyMaintenanceFees.value + +this.monthlyAgentFees.value;
-    const monthlyCashFlow = +this.monthlyRent.value - monthlyExpenses;
-    const yearlyProfit = monthlyCashFlow * 12;
-    const returnOnInvestment = (12 * monthlyCashFlow) / (totalCosts);
 
-    this.result = {
-      stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, yearlyProfit, monthlyExpenses, monthlyMortgagePayment
-    } as Result;
+    if ('yes' === this.mortgage.value){
+      const totalCosts = +this.deposit.value + stampDuty + +this.legalFees.value + +this.annualGroundRent.value + +this.annualServiceCharge.value;
+      const monthlyMortgagePayment = ((+this.purchasePrice.value - +this.deposit.value) * (+this.mortgageRate.value / 100)) / 12;
+      const monthlyExpenses = (+this.yearlyInsurance.value / 12) + monthlyMortgagePayment + +this.monthlyMaintenanceFees.value + +this.monthlyAgentFees.value;
+      const monthlyCashFlow = +this.monthlyRent.value - monthlyExpenses;
+      const yearlyProfit = monthlyCashFlow * 12;
+      const returnOnInvestment = (12 * monthlyCashFlow) / (totalCosts);
+
+      this.result = {
+        stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, yearlyProfit, monthlyExpenses, monthlyMortgagePayment
+      } as Result;
+    }
+    // cash buyer
+    else {
+      const totalCosts = +this.purchasePrice.value + stampDuty + +this.legalFees.value;
+      const monthlyExpenses = (+this.yearlyInsurance.value / 12) + +this.monthlyMaintenanceFees.value + +this.monthlyAgentFees.value;
+      const monthlyCashFlow = +this.monthlyRent.value - monthlyExpenses;
+      const yearlyProfit = monthlyCashFlow * 12;
+      const returnOnInvestment = (12 * monthlyCashFlow) / (totalCosts);
+
+      this.result = {
+        stampDuty, totalCosts, rentalYield, returnOnInvestment, monthlyCashFlow, yearlyProfit, monthlyExpenses
+      } as Result;
+    }
 
 
-    const tree = this.router.createUrlTree([], {queryParams: this.result});
-    console.log(this.serializer.serialize(tree)); // "/?foo=a&bar=42"
-    console.log(this.result); // "/?foo=a&bar=42"
+    this.router.createUrlTree([], {queryParams: this.result});
   }
 
   ltv(ltv: number): void {
@@ -163,6 +186,14 @@ export class AppComponent implements OnInit {
 
   get yearlyInsurance(): AbstractControl {
     return this.calculatorForm.get('yearlyInsurance');
+  }
+
+  get annualGroundRent(): AbstractControl {
+    return this.calculatorForm.get('annualGroundRent');
+  }
+
+  get annualServiceCharge(): AbstractControl {
+    return this.calculatorForm.get('annualServiceCharge');
   }
 
 }

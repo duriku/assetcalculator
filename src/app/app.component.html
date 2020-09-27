@@ -1,15 +1,19 @@
 <!-- Toolbar -->
 <mat-toolbar color="primary">
-  <span>Asset Calculator (Buy To Let)</span>
+  <span>Asset Calculator (Buy To Let) </span>
   <span class="example-spacer"></span>
 
   <div class="top-navbar-menu">
+    <button mat-button>
+      <img src="assets/jksoftware-inverted-64.png" alt="Jk Software" style="width: 64px; height: 64px;">
+      <span style="font-size: 20px">Jk Software</span>
+    </button>
 <!--    <button mat-button>-->
-<!--      <mat-icon class="example-icon" aria-hidden="false">input</mat-icon>-->
-<!--      <span> Simple Calculator</span>-->
+<!--      <img src="assets/linkedin.png" alt="Jk Software" style="width: 64px; height: 64px;">-->
 <!--    </button>-->
 
-<!--    <button mat-button>-->
+
+    <!--    <button mat-button>-->
 <!--      <mat-icon class="example-icon" aria-hidden="false">home</mat-icon>-->
 <!--      <span> Buy To Let</span>-->
 <!--    </button>-->
@@ -96,7 +100,7 @@
   </div>
 
 
-  <div fxLayout="row" fxLayoutAlign="space-around" class="calculator-container">
+  <div fxLayout="row" fxLayoutAlign="space-between" class="calculator-container" style="width: 100%">
     <div class="calculator-column">
       <form [formGroup]="calculatorForm" class="calculator-form" (ngSubmit)="submit()">
         <div>
@@ -130,15 +134,15 @@
             </label>
           </mat-form-field>
         </div>
-        <div *ngIf="mortgage.value === 'yes'" style="margin-bottom: 1em">
-          <mat-form-field>
+        <div *ngIf="mortgage.value === 'yes'" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field style="width: 65%">
             <mat-label>Deposit</mat-label>
             <label>
               <input type="text" matInput [formControl]="deposit" placeholder="£">
             </label>
           </mat-form-field>
-<!--          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>-->
-<!--          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>-->
+          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>
+          <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>
         </div>
 
         <!--        <h3>Costs</h3>-->
@@ -156,35 +160,49 @@
           </mat-form-field>
         </div>
 
-        <div>
-          <mat-form-field >
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field style="width: 55%">
             <mat-label>Monthly Management Fees</mat-label>
             <input type="text" matInput [formControl]="monthlyAgentFees" placeholder="£">
           </mat-form-field>
-          <div>
-<!--            <button type="button" mat-stroked-button color="accent" (click)="management(0.08)">8%</button>-->
-<!--            <button type="button" mat-stroked-button color="accent" (click)="management(0.1)">10%</button>-->
-<!--            <button type="button" mat-stroked-button color="accent" (click)="management(0.12)">12%</button>-->
-          </div>
+            <button type="button" mat-stroked-button color="accent" (click)="management(0.08)">8%</button>
+            <button type="button" mat-stroked-button color="accent" (click)="management(0.1)">10%</button>
+            <button type="button" mat-stroked-button color="accent" (click)="management(0.12)">12%</button>
         </div>
 
-        <div>
-          <mat-form-field >
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field style="width: 45%">
             <mat-label>Monthly Maintenance Fees</mat-label>
             <label>
               <input type="text" matInput [formControl]="monthlyMaintenanceFees" placeholder="£">
             </label>
           </mat-form-field>
-        </div>
 
-        <div>
-          <mat-form-field >
+          <mat-form-field style="width: 45%">
             <mat-label>Yearly Insurance</mat-label>
             <label>
               <input type="text" matInput [formControl]="yearlyInsurance" placeholder="£">
             </label>
           </mat-form-field>
         </div>
+
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field style="width: 45%">
+            <mat-label>Annual Ground Rent</mat-label>
+            <label>
+              <input type="text" matInput [formControl]="annualGroundRent" placeholder="£">
+            </label>
+          </mat-form-field>
+
+          <mat-form-field style="width: 45%">
+            <mat-label>Annual Service Charge</mat-label>
+            <label>
+              <input type="text" matInput [formControl]="annualServiceCharge" placeholder="£">
+            </label>
+          </mat-form-field>
+        </div>
+
 
         <div>
           <button [disabled]="calculatorForm.invalid" type="submit" mat-raised-button color="primary">Calculate</button>
@@ -238,5 +256,28 @@
         </div>
       </div>
     </div>
+
+    <div class="explanation-column" *ngIf="result" fxLayout="column" fxLayoutAlign="spaces-between">
+      <div>
+      <h2> How was it calculated?</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci, cupiditate deleniti error illo ipsam, ipsum libero natus provident qui repudiandae sequi voluptatum? Eveniet, soluta, unde. Alias deserunt, dignissimos distinctio ducimus incidunt laboriosam ut vero. Ad aperiam architecto debitis ex excepturi fugiat nobis quas quos similique vitae. Fugiat illo, obcaecati!
+      </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque esse harum laborum magnam molestias nam non reiciendis similique tempore veniam.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium commodi consectetur cum dignissimos earum exercitationem id ipsam ipsum molestias nulla numquam placeat porro provident quo repellat, repellendus sapiente? Maiores, obcaecati.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, sapiente.</p>
+      </div>
+
+      <div>
+      <h2> References </h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequatur laboriosam necessitatibus ratione sed suscipit. Adipisci cumque deleniti dicta distinctio doloribus enim eos esse expedita inventore iure laborum maxime modi nobis, obcaecati odit officiis pariatur provident quaerat quibusdam quos ratione reiciendis tempora veritatis voluptate voluptatem? Adipisci dolore dolorum fuga obcaecati?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci beatae excepturi, in laboriosam nihil possimus quia rem unde voluptates.</p>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<!-- Footer -->
+<!--<div class="footer" fxLayout="row" fxLayoutAlign="center center">-->
+<!--  Version {{version}}-->
+<!--</div>-->

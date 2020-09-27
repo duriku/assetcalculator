@@ -7,9 +7,9 @@ h3 {
 }
 
 .top-navbar-menu{
-  width: 40%;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .content{
@@ -31,11 +31,11 @@ h3 {
 }
 
 .result-column {
-  width: 33%;
+  width: 25%;
 }
 
 .explanation-column {
-  width: 25%;
+  width: 33%;
 }
 
 .mat-form-field{
