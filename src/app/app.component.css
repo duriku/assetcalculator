@@ -6,12 +6,6 @@ h3 {
   flex: 1 1 auto;
 }
 
-.top-navbar-menu{
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .content{
   margin: 30px;
 }
@@ -26,17 +20,6 @@ h3 {
   width: 80%;
 }
 
-.calculator-column {
-  width: 33%;
-}
-
-.result-column {
-  width: 25%;
-}
-
-.explanation-column {
-  width: 33%;
-}
 
 .mat-form-field{
   width:100%;

@@ -3,10 +3,10 @@
   <span>Asset Calculator (Buy To Let) </span>
   <span class="example-spacer"></span>
 
-  <div class="top-navbar-menu">
+  <div class="top-navbar-menu" fxLayoutAlign="row" fxLayoutAlign="end" fxFlex="100">
     <button mat-button>
       <img src="assets/jksoftware-inverted-64.png" alt="Jk Software" style="width: 64px; height: 64px;">
-      <span style="font-size: 20px">Jk Software</span>
+<!--      <span style="font-size: 20px">Jk Software</span>-->
     </button>
 <!--    <button mat-button>-->
 <!--      <img src="assets/linkedin.png" alt="Jk Software" style="width: 64px; height: 64px;">-->
@@ -100,8 +100,8 @@
   </div>
 
 
-  <div fxLayout="row" fxLayoutAlign="space-between" class="calculator-container" style="width: 100%">
-    <div class="calculator-column">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between" class="calculator-container" fxFlexFill>
+    <div fxFlex="33" fxFlex.xs="100">
       <form [formGroup]="calculatorForm" class="calculator-form" (ngSubmit)="submit()">
         <div>
           <mat-form-field >
@@ -121,7 +121,7 @@
         </div>
         <!--        <h3>Finances</h3>-->
         <div style="margin-bottom: 1em">
-          <mat-radio-group [formControl]="mortgage" style="width: 50%" fxLayout="row" fxLayoutAlign="space-between">
+          <mat-radio-group [formControl]="mortgage" fxLayout="row"  fxFlex="50" fxFlex.xs="66" fxLayoutAlign="space-between">
             <mat-radio-button value="yes" selected>Mortgage</mat-radio-button>
             <mat-radio-button value="no">Cash</mat-radio-button>
           </mat-radio-group>
@@ -134,15 +134,17 @@
             </label>
           </mat-form-field>
         </div>
-        <div *ngIf="mortgage.value === 'yes'" fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-form-field style="width: 65%">
+        <div *ngIf="mortgage.value === 'yes'" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between space-between">
+          <mat-form-field fxFlex="65">
             <mat-label>Deposit</mat-label>
             <label>
               <input type="text" matInput [formControl]="deposit" placeholder="£">
             </label>
           </mat-form-field>
+          <div fxFlex="35" fxLayout="row" fxLayoutAlign="spaces-between">
           <button type="button" mat-stroked-button color="accent" (click)="ltv(0.25)">LTV 75</button>
           <button type="button" mat-stroked-button color="accent" (click)="ltv(0.6)">LTV 60</button>
+          </div>
         </div>
 
         <!--        <h3>Costs</h3>-->
@@ -160,25 +162,28 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-form-field style="width: 55%">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between space-between">
+          <mat-form-field fxFlex="55">
             <mat-label>Monthly Management Fees</mat-label>
             <input type="text" matInput [formControl]="monthlyAgentFees" placeholder="£">
           </mat-form-field>
+          <div fxFlex="45" fxLayout="row" fxLayoutAlign="spaces-between">
             <button type="button" mat-stroked-button color="accent" (click)="management(0.08)">8%</button>
             <button type="button" mat-stroked-button color="accent" (click)="management(0.1)">10%</button>
             <button type="button" mat-stroked-button color="accent" (click)="management(0.12)">12%</button>
+          </div>
         </div>
 
+
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-form-field style="width: 45%">
+          <mat-form-field fxFlex="45">
             <mat-label>Monthly Maintenance Fees</mat-label>
             <label>
               <input type="text" matInput [formControl]="monthlyMaintenanceFees" placeholder="£">
             </label>
           </mat-form-field>
 
-          <mat-form-field style="width: 45%">
+          <mat-form-field fxFlex="45">
             <mat-label>Yearly Insurance</mat-label>
             <label>
               <input type="text" matInput [formControl]="yearlyInsurance" placeholder="£">
@@ -188,21 +193,20 @@
 
 
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-form-field style="width: 45%">
+          <mat-form-field fxFlex="45">
             <mat-label>Annual Ground Rent</mat-label>
             <label>
               <input type="text" matInput [formControl]="annualGroundRent" placeholder="£">
             </label>
           </mat-form-field>
 
-          <mat-form-field style="width: 45%">
+          <mat-form-field fxFlex="45">
             <mat-label>Annual Service Charge</mat-label>
             <label>
               <input type="text" matInput [formControl]="annualServiceCharge" placeholder="£">
             </label>
           </mat-form-field>
         </div>
-
 
         <div>
           <button [disabled]="calculatorForm.invalid" type="submit" mat-raised-button color="primary">Calculate</button>
@@ -212,7 +216,7 @@
     </div>
 
 
-    <div class="result-column" *ngIf="result">
+    <div *ngIf="result" fxFlex="25" fxFlex.xs="100">
       <div fxLayout="column" fxLayoutAlign="space-between space-between" style="min-height: 22em">
         <div fxLayout="column" fxLayoutAlign="space-around space-around" style="min-height: 8em; font-weight: bold" >
           <div fxLayout="row" fxLayoutAlign="space-between">
@@ -257,7 +261,7 @@
       </div>
     </div>
 
-    <div class="explanation-column" *ngIf="result" fxLayout="column" fxLayoutAlign="spaces-between">
+    <div *ngIf="result" fxLayout="column" fxFlex="33" fxFlex.xs="100" fxLayoutAlign="spaces-between">
       <div>
       <h2> How was it calculated?</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci, cupiditate deleniti error illo ipsam, ipsum libero natus provident qui repudiandae sequi voluptatum? Eveniet, soluta, unde. Alias deserunt, dignissimos distinctio ducimus incidunt laboriosam ut vero. Ad aperiam architecto debitis ex excepturi fugiat nobis quas quos similique vitae. Fugiat illo, obcaecati!
